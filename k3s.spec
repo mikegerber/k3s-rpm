@@ -82,6 +82,7 @@ fi
 install -Dpm0755 %{SOURCE0} %{buildroot}%{_bindir}/k3s
 install -Dpm0644 %{SOURCE1} %{buildroot}%{_unitdir}/k3s.service
 install -Dpm0644 %{SOURCE2} %{buildroot}%{_sysconfdir}/sysconfig/k3s
+install -d %{buildroot}%{_sysconfdir}/rancher/k3s
 
 
 %post
@@ -97,10 +98,11 @@ install -Dpm0644 %{SOURCE2} %{buildroot}%{_sysconfdir}/sysconfig/k3s
 
 
 %files
-%license
 %{_bindir}/k3s
 %{_unitdir}/k3s.service
 %config(noreplace) %{_sysconfdir}/sysconfig/k3s
+%dir %{_sysconfdir}/rancher
+%dir %{_sysconfdir}/rancher/k3s
 
 
 %changelog

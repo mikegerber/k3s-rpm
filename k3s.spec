@@ -1,5 +1,5 @@
 # renovate: datasource=github-releases depName=k3s-io/k3s versioning=loose
-%global k3s_upstream_version v1.36.5+k3s1
+%global k3s_upstream_version v1.37.1+k3s1
 
 %global k3s_version %{lua:
   local v = rpm.expand("%{k3s_upstream_version}")

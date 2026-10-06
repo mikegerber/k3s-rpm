@@ -1,0 +1,8 @@
+# Environment variables passed to k3s.
+#
+# Examples:
+# K3S_KUBECONFIG_MODE="0640"
+# K3S_NODE_NAME="node1"
+#
+# Most server configuration is better placed in:
+# /etc/rancher/k3s/config.yaml

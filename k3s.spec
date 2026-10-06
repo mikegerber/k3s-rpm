@@ -23,9 +23,11 @@ ExclusiveArch:  x86_64 aarch64
 
 %ifarch x86_64
 %global k3s_upstream_arch amd64
+%global k3s_upstream_binary k3s
 %else
 %ifarch aarch64
 %global k3s_upstream_arch arm64
+%global k3s_upstream_binary k3s-arm64
 %endif
 %endif
 
@@ -52,14 +54,7 @@ computing, development, and single-node installations.
 # Verify the downloaded release binary against the checksum file
 # published with the same upstream release.
 
-%ifarch x86_64
-expected=$(awk '$2 == "k3s" { print $1 }' %{SOURCE10})
-%endif
-
-%ifarch aarch64
-expected=$(awk '$2 == "k3s-arm64" { print $1 }' %{SOURCE10})
-%endif
-
+expected=$(awk '$2 == "%{k3s_upstream_binary}" { print $1 }' %{SOURCE10})
 actual=$(sha256sum %{SOURCE0} | awk '{ print $1 }')
 
 if [ -z "$expected" ]; then

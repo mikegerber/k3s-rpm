@@ -1,0 +1,15 @@
+{
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/(^|/)k3s\\.spec$/"
+      ],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\n%global k3s_version (?<currentValue>\\d+\\.\\d+\\.\\d+)\\n%global k3s_revision (?<currentRevision>\\d+)"
+      ],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "k3s-io/k3s"
+    }
+  ]
+}

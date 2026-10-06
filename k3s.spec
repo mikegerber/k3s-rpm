@@ -1,10 +1,10 @@
 # renovate: datasource=github-releases depName=k3s-io/k3s
-%global upstream_version 1.36.5
-%global k3s_release 1
+%global k3s_version 1.36.5
+%global k3s_revision 1
 
 Name:           k3s
-Version:        %{upstream_version}
-Release:        %{k3s_release}.k3s1%{?dist}
+Version:        %{k3s_version}
+Release:        %{k3s_revision}.k3s1%{?dist}
 Summary:        Lightweight Kubernetes
 
 License:        Apache-2.0

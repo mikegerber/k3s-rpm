@@ -22,14 +22,15 @@ ExclusiveArch:  x86_64 aarch64
 
 
 %ifarch x86_64
-Source0:        https://github.com/k3s-io/k3s/releases/download/%{k3s_upstream_version}/k3s
-Source10:       https://github.com/k3s-io/k3s/releases/download/%{k3s_upstream_version}/sha256sum-amd64.txt
+%global k3s_upstream_arch amd64
+%else
+%ifarch aarch64
+%global k3s_upstream_arch arm64
+%endif
 %endif
 
-%ifarch aarch64
-Source0:        https://github.com/k3s-io/k3s/releases/download/%{k3s_upstream_version}/k3s-arm64
-Source10:       https://github.com/k3s-io/k3s/releases/download/%{k3s_upstream_version}/sha256sum-arm64.txt
-%endif
+Source0:  https://github.com/k3s-io/k3s/releases/download/%{k3s_upstream_version}/k3s#/k3s-%{k3s_upstream_version}-%{k3s_upstream_arch}
+Source10: https://github.com/k3s-io/k3s/releases/download/%{k3s_upstream_version}/sha256sum-%{k3s_upstream_arch}.txt#/sha256sum-%{k3s_upstream_version}-%{k3s_upstream_arch}.txt
 
 Source1:        k3s.service
 Source2:        k3s.sysconfig

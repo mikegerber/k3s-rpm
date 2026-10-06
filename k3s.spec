@@ -76,7 +76,7 @@ cp %{SOURCE3} LICENSE
 %install
 install -Dpm0755 %{SOURCE0} %{buildroot}%{_bindir}/k3s
 install -Dpm0644 %{SOURCE1} %{buildroot}%{_unitdir}/k3s.service
-install -Dpm0644 %{SOURCE2} %{buildroot}%{_sysconfdir}/sysconfig/k3s
+install -Dpm0600 %{SOURCE2} %{buildroot}%{_sysconfdir}/sysconfig/k3s
 install -d %{buildroot}%{_sysconfdir}/rancher/k3s
 
 

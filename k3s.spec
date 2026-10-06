@@ -1,6 +1,15 @@
-# renovate: datasource=github-releases depName=k3s-io/k3s
-%global k3s_version 1.36.5
-%global k3s_revision 1
+# renovate: datasource=github-releases depName=k3s-io/k3s versioning=loose
+%global k3s_upstream_version v1.36.5+k3s1
+
+%global k3s_version %{lua:
+  local v = rpm.expand("%{k3s_upstream_version}")
+  print(v:match("^v([^+]+)"))
+}
+
+%global k3s_revision %{lua:
+  local v = rpm.expand("%{k3s_upstream_version}")
+  print(v:match("%+k3s(.+)$"))
+}
 
 Name:           k3s
 Version:        %{k3s_version}
@@ -11,16 +20,15 @@ License:        Apache-2.0
 URL:            https://k3s.io
 ExclusiveArch:  x86_64 aarch64
 
-%global upstream_tag v%{version}+k3s1
 
 %ifarch x86_64
-Source0:        https://github.com/k3s-io/k3s/releases/download/%{upstream_tag}/k3s
-Source10:       https://github.com/k3s-io/k3s/releases/download/%{upstream_tag}/sha256sum-amd64.txt
+Source0:        https://github.com/k3s-io/k3s/releases/download/%{k3s_upstream_version}/k3s
+Source10:       https://github.com/k3s-io/k3s/releases/download/%{k3s_upstream_version}/sha256sum-amd64.txt
 %endif
 
 %ifarch aarch64
-Source0:        https://github.com/k3s-io/k3s/releases/download/%{upstream_tag}/k3s-arm64
-Source10:       https://github.com/k3s-io/k3s/releases/download/%{upstream_tag}/sha256sum-arm64.txt
+Source0:        https://github.com/k3s-io/k3s/releases/download/%{k3s_upstream_version}/k3s-arm64
+Source10:       https://github.com/k3s-io/k3s/releases/download/%{k3s_upstream_version}/sha256sum-arm64.txt
 %endif
 
 Source1:        k3s.service

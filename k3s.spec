@@ -3,17 +3,12 @@
 
 %global k3s_version %{lua:
   local v = rpm.expand("%{k3s_upstream_version}")
-  print(v:match("^v([^+]+)"))
-}
-
-%global k3s_revision %{lua:
-  local v = rpm.expand("%{k3s_upstream_version}")
-  print(v:match("%+k3s(.+)$"))
+  print(v:match("^v(.+)"))
 }
 
 Name:           k3s
 Version:        %{k3s_version}
-Release:        %{k3s_revision}.k3s1%{?dist}
+Release:        1%{?dist}
 Summary:        Lightweight Kubernetes
 
 License:        Apache-2.0
@@ -102,5 +97,8 @@ install -d %{buildroot}%{_sysconfdir}/rancher/k3s
 
 
 %changelog
+* Tue Oct 06 2026 Mike Gerber <mike@mike-gerber.de> - 1.37.1+k3s1-1
+- Revert to using the upstream version scheme
+
 * Tue Oct 06 2026 Mike Gerber <mike@mike-gerber.de> - 1.36.5-1.k3s1
 - Initial package

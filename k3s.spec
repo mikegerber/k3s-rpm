@@ -32,6 +32,8 @@ Source10: https://github.com/k3s-io/k3s/releases/download/%{k3s_upstream_version
 Source1:        k3s.service
 Source2:        k3s.sysconfig
 
+Source3:  https://raw.githubusercontent.com/k3s-io/k3s/refs/heads/main/LICENSE
+
 Requires:       k3s-selinux
 Requires:       systemd
 
@@ -63,6 +65,8 @@ if [ "$expected" != "$actual" ]; then
     echo "  actual:   $actual" >&2
     exit 1
 fi
+
+cp %{SOURCE3} LICENSE
 
 
 %build
@@ -99,11 +103,13 @@ install -d %{buildroot}%{_sysconfdir}/rancher/k3s
 %config(noreplace) %{_sysconfdir}/sysconfig/k3s
 %dir %{_sysconfdir}/rancher
 %dir %{_sysconfdir}/rancher/k3s
+%license LICENSE
 
 
 %changelog
 * Tue Oct 06 2026 Mike Gerber <mike@mike-gerber.de> - 1.37.1+k3s1-1
 - Revert to using the upstream version scheme
+- Add LICENSE
 
 * Tue Oct 06 2026 Mike Gerber <mike@mike-gerber.de> - 1.36.5-1.k3s1
 - Initial package

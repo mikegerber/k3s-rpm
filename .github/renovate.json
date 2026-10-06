@@ -1,1 +1,16 @@
-{ "enabled": true }
+{
+  "extends": [
+    "config:recommended"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/\\.spec$/"
+      ],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+) versioning=(?<versioning>\\S+)\\n%global k3s_upstream_version (?<currentValue>\\S+)"
+      ]
+    }
+  ]
+}

@@ -76,6 +76,11 @@ install -Dpm0644 %{SOURCE2} %{buildroot}%{_sysconfdir}/sysconfig/k3s
 install -d %{buildroot}%{_sysconfdir}/rancher/k3s
 
 
+%check
+# Check that the installed binary is runnable and returns the correct version.
+%{buildroot}%{_bindir}/k3s --version | grep 'version %{k3s_upstream_version}'
+
+
 %post
 %systemd_post k3s.service
 

@@ -8,7 +8,7 @@
 
 Name:           k3s
 Version:        %{k3s_version}
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Lightweight Kubernetes
 
 License:        Apache-2.0
@@ -75,6 +75,11 @@ cp %{SOURCE3} LICENSE
 
 %install
 install -Dpm0755 %{SOURCE0} %{buildroot}%{_bindir}/k3s
+
+ln -s k3s %{buildroot}%{_bindir}/kubectl
+ln -s k3s %{buildroot}%{_bindir}/crictl
+ln -s k3s %{buildroot}%{_bindir}/ctr
+
 install -Dpm0644 %{SOURCE1} %{buildroot}%{_unitdir}/k3s.service
 install -Dpm0600 %{SOURCE2} %{buildroot}%{_sysconfdir}/sysconfig/k3s
 install -d %{buildroot}%{_sysconfdir}/rancher/k3s
@@ -99,6 +104,9 @@ install -d %{buildroot}%{_sysconfdir}/rancher/k3s
 
 %files
 %{_bindir}/k3s
+%{_bindir}/kubectl
+%{_bindir}/crictl
+%{_bindir}/ctr
 %{_unitdir}/k3s.service
 %config(noreplace) %{_sysconfdir}/sysconfig/k3s
 %dir %{_sysconfdir}/rancher
@@ -107,6 +115,10 @@ install -d %{buildroot}%{_sysconfdir}/rancher/k3s
 
 
 %changelog
+* Mon Nov 16 2026 Mike Gerber <mike@mike-gerber.de> - 1.37.2+k3s1-2
+- Bump to 1.37.2+k3s1
+- Install kubectl, crictl, ctr symlinks
+
 * Tue Oct 06 2026 Mike Gerber <mike@mike-gerber.de> - 1.37.1+k3s1-1
 - Revert to using the upstream version scheme
 - Add LICENSE
